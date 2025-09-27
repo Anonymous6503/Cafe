@@ -4,7 +4,7 @@ using UnityEngine;
 public class CashierManager : MonoBehaviour
 {
     public GameObject cashierPrefab;
-
+    public int cashierHireCost = 100;
     public Transform hireSpawnPoint;
 
     private List<Cashier> allCashiers = new List<Cashier>();
@@ -24,6 +24,8 @@ public class CashierManager : MonoBehaviour
             Debug.LogError("Cashier Prefab or Spawn Point is not set in the CashierManager!");
             return;
         }
+        if (!CafeManager.Instance.playerWallet.TrySpendMoney(cashierHireCost))
+            return;
 
         GameObject cashierInstance = Instantiate(cashierPrefab, hireSpawnPoint.position, Quaternion.identity);
         cashierInstance.name = $"Cashier {allCashiers.Count + 1}";

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.TextCore.Text;
 
 public class CashierMovingToMachineState : State
 {
@@ -12,6 +13,10 @@ public class CashierMovingToMachineState : State
     public override void Enter()
     {
         cashier = stateMachine.GetComponent<Cashier>();
+        cashier.animator.SetBool("isMoving", true);
+        cashier.ResumeAgent();
+        cashier.UpdateMovementAnimation(true);
+
         navMeshAgent = cashier.GetComponent<NavMeshAgent>();
         MachineManager machineManager = GameObject.FindAnyObjectByType<MachineManager>();
 

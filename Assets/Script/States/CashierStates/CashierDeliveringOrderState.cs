@@ -16,10 +16,14 @@ public class CashierDeliveringOrderState : State
 
     public override void Execute()
     {
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !navMeshAgent.pathPending)
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
             Debug.Log("Order delivered!");
-            cashier.targetSpot.customerInSpot.CompleteOrder();
+
+            Order order = cashier.currentOrder;
+
+            CafeManager.Instance.playerWallet.AddMoney(order.menuItem.price);
+            order.customer.CompleteOrder();
 
             cashier.targetSpot.FreeSpot();
             stateMachine.TransitionTo(new CashierIdleState(stateMachine));

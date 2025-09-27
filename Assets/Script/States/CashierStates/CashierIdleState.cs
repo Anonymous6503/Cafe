@@ -9,7 +9,7 @@ public class CashierIdleState : State
     public override void Enter()
     {
         var cashier = stateMachine.GetComponent<Cashier>();
-
+        cashier.animator.SetBool("isMoving", false);
         OnCashierBecameIdle?.Invoke(cashier);
     }
 }

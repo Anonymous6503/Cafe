@@ -3,6 +3,7 @@ using System;
 public abstract class BaseMachine : MonoBehaviour
 {
     public MachineType machineType;
+    public int cost = 150;
 
     public Transform operationPoint;
 

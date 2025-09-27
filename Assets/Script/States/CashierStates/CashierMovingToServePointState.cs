@@ -10,6 +10,8 @@ public class CashierMovingToServePointState : State
     public override void Enter()
     {
         cashier = stateMachine.GetComponent<Cashier>();
+        cashier.ResumeAgent();
+        cashier.UpdateMovementAnimation(true);
         navMeshAgent = stateMachine.GetComponent<NavMeshAgent>();
 
         cashier.MoveTo(cashier.targetSpot.servePoint.position);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class CustomerWaitingToGiveOrderState : State
 {
@@ -18,6 +19,9 @@ public class CustomerWaitingToGiveOrderState : State
         }
 
         Customer customer = stateMachine.GetComponent<Customer>();
+        customer.animator.SetBool("isMoving", false);
+        customer.StopAgent();
+        customer.LookAt(customer.assignedSpot.servePoint.position);
 
         MenuItemData selectedMenuItem = menu.GetRandomMenuItem();
 

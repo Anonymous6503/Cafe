@@ -3,19 +3,16 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(StateMachine))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class Customer : MonoBehaviour, ICharacter
+public class Customer : BaseCharacter
 {
-    public StateMachine stateMachine { get; private set; }
-    public NavMeshAgent navMeshAgent;
 
     public CounterSpot assignedSpot { get; private set; }
     public Transform homePoint { get; set; }
 
 
-    void Awake()
+    protected override void Awake()
     {
-        stateMachine = GetComponent<StateMachine>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        base.Awake();
     }
 
     void Start()
@@ -26,11 +23,6 @@ public class Customer : MonoBehaviour, ICharacter
     public void MoveTo(CounterSpot spot)
     {
         assignedSpot = spot;
-    }
-
-    public void MoveTo(Vector3 destination)
-    {
-        navMeshAgent.SetDestination(destination);
     }
 
     public void Setup(Transform spawnPoint, CounterSpot destinationSpot)

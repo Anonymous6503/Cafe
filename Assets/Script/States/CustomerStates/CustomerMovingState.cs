@@ -11,6 +11,7 @@ public class CustomerMovingState : State
     public override void Enter()
     {
         customer = stateMachine.GetComponent<Customer>();
+        customer.animator.SetBool("isMoving", true);
         navMeshAgent = customer.navMeshAgent;
 
         if (customer.assignedSpot != null)

@@ -3,17 +3,29 @@ using System.Collections.Generic;
 
 public class CafeManager : MonoBehaviour
 {
+    public static CafeManager Instance { get; private set; }
+
     public MachineManager machineManager;
 
     public CustomerManager customerManager;
     public CashierManager cashierManager;
     public MenuItemData startingItem; 
     private Menu menu;
+    public PlayerWallet playerWallet;
 
     private Queue<Order> waitingOrderQueue = new Queue<Order>();
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Destroy duplicate instances
+        }
+        else
+        {
+            Instance = this;
+        }
+
         menu = GetComponent<Menu>();
     }
 

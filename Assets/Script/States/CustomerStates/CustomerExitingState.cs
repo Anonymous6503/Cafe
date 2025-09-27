@@ -12,6 +12,9 @@ public class CustomerExitingState : State
         if (stateMachine == null) return;
 
         var customer = stateMachine.GetComponent<Customer>();
+        customer.ResumeAgent();
+        customer.UpdateMovementAnimation(true);
+
         navMeshAgent = customer.navMeshAgent;
 
         if (customer.homePoint != null && navMeshAgent != null)

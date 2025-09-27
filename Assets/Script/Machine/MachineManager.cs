@@ -30,6 +30,9 @@ public class MachineManager : MonoBehaviour
             Debug.LogError($"No prefab found for machine type: {typeToSpawn}");
             return;
         }
+        int machineCost = prefabToSpawn.GetComponent<BaseMachine>().cost;
+        if (!CafeManager.Instance.playerWallet.TrySpendMoney(machineCost))
+            return;
 
         for (int i = 0; i < machinePlacementPoints.Count; i++)
         {

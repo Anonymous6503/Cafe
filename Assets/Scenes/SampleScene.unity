@@ -871,6 +871,7 @@ GameObject:
   - component: {fileID: 1550205323}
   - component: {fileID: 1550205322}
   - component: {fileID: 1550205324}
+  - component: {fileID: 1550205325}
   m_Layer: 0
   m_Name: CafeManager
   m_TagString: Untagged
@@ -894,6 +895,7 @@ MonoBehaviour:
   customerManager: {fileID: 434876770}
   cashierManager: {fileID: 1918607191}
   startingItem: {fileID: 11400000, guid: e73aab2ff175d664f8456173f9b6a9b9, type: 2}
+  playerWallet: {fileID: 1550205325}
 --- !u!4 &1550205323
 Transform:
   m_ObjectHideFlags: 0
@@ -922,6 +924,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unlockedItems: []
+--- !u!114 &1550205325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550205321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2824ce2e2fba4498dc8b4e17f99090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingMoney: 250
+  currentMoney: 0
 --- !u!1 &1599374226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1071,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4f1ac447a9b1f49be2015af49875bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashierPrefab: {fileID: 881880235705962107, guid: 43699c0cc31081c4caf618d456928da4, type: 3}
+  cashierPrefab: {fileID: 881880235705962107, guid: fc5f465ebce2ad24f90c2d6e10e11919, type: 3}
+  cashierHireCost: 100
   hireSpawnPoint: {fileID: 1203938949}
 --- !u!4 &1918607192
 Transform:

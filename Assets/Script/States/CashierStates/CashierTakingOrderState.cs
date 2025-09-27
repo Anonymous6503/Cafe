@@ -4,15 +4,21 @@ public class CashierTakingOrderState : State
 {
     private float orderTakenTimer;
     private bool hasProcessedOrder = false;
+    private Cashier cashier;
 
     public CashierTakingOrderState(StateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
-        orderTakenTimer = Time.time + Random.Range(1f, 3f);
         hasProcessedOrder = false;
+        cashier = stateMachine.GetComponent<Cashier>();
 
-        Debug.Log("Cashier has arrived at the counter and is now taking the order...");
+        cashier.StopAgent();
+        cashier.UpdateMovementAnimation(false);
+        cashier.LookAt(cashier.targetSpot.customerPoint.position);
+
+        orderTakenTimer = Time.time + Random.Range(1f, 3f);
+        Debug.Log("Cashier has arrived and is now taking the order...");
     }
 
     public override void Execute()
@@ -20,8 +26,6 @@ public class CashierTakingOrderState : State
         if (Time.time >= orderTakenTimer && !hasProcessedOrder)
         {
             hasProcessedOrder = true;
-
-            var cashier = stateMachine.GetComponent<Cashier>();
             Order order = cashier.currentOrder;
 
             if (order != null && order.customer != null)
@@ -29,7 +33,6 @@ public class CashierTakingOrderState : State
                 Debug.Log($"Order for {order.menuItem.itemName} has been taken.");
                 order.customer.PlaceOrder();
 
-                // Now that the order is officially taken, move to the machine.
                 stateMachine.TransitionTo(new CashierMovingToMachineState(stateMachine));
             }
             else

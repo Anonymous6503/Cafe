@@ -11,6 +11,7 @@ public class CashierWaitingForMachineState : State
     public override void Enter()
     {
         cashier = stateMachine.GetComponent<Cashier>();
+        cashier.animator.SetBool("isMoving", false);
         machineManager = Object.FindAnyObjectByType<MachineManager>();
         Debug.Log($"{cashier.name} is now waiting for a free machine.");
     }
