@@ -15,7 +15,7 @@ public class CashierOperatingMachineState : State
 
         var cashier = stateMachine.GetComponent<Cashier>();
         cashier.animator.SetBool("isMoving", false);
-        machine.StartCrafting(cashier.currentOrder);
+        machine.StartCrafting(cashier.currentOrder, cashier.coffeeSpawnPoint);
     }
 
     private void HandleCraftingComplete(Order order)

@@ -5,17 +5,17 @@ public class CoffeeMachine : BaseMachine
 {
     public Transform productSpawnPoint;
 
-    public override void StartCrafting(Order order)
+    public override void StartCrafting(Order order, Transform parent = null)
     {
         // Check if the machine is free and the order is for this machine type.
         if (!isBusy && order.menuItem.machineTypeRequired == this.machineType)
         {
             // Start the coffee-making process.
-            StartCoroutine(ProcessOrderRoutine(order));
+            StartCoroutine(ProcessOrderRoutine(order, parent));
         }
     }
 
-    private IEnumerator ProcessOrderRoutine(Order order)
+    private IEnumerator ProcessOrderRoutine(Order order, Transform parent)
     {
         Debug.Log($"Starting to brew {order.menuItem.itemName}...");
 
@@ -23,9 +23,14 @@ public class CoffeeMachine : BaseMachine
 
         yield return new WaitForSeconds(order.menuItem.creationTime);
 
-        if (order.menuItem.productPrefab != null && productSpawnPoint != null)
+        /*if (order.menuItem.productPrefab != null && productSpawnPoint != null)
         {
             Instantiate(order.menuItem.productPrefab, productSpawnPoint.position, Quaternion.identity);
+        }*/
+
+        if(parent != null)
+        {
+            Instantiate(order.menuItem.productPrefab,parent);
         }
 
         Debug.Log($"{order.menuItem.itemName} is ready!");

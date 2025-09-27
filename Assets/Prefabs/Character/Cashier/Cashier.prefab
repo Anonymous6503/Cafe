@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &729025891801496836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9044921997123476536}
+  m_Layer: 0
+  m_Name: CoffeeSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9044921997123476536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729025891801496836}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1163381599655287989}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &881880235705962107
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a4ab48489c850479b8715530514c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coffeeSpawnPoint: {fileID: 9044921997123476536}
 --- !u!95 &2458214998269375177
 Animator:
   serializedVersion: 7
@@ -174,12 +206,20 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: e3f280cb4c768c84c921838e5d78ecba, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8891244130364874969, guid: a2bb308438058bc498b39e366a0f0616, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9044921997123476536}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2bb308438058bc498b39e366a0f0616, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8966269951162659501}
   m_SourcePrefab: {fileID: 100100000, guid: a2bb308438058bc498b39e366a0f0616, type: 3}
+--- !u!4 &1163381599655287989 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8891244130364874969, guid: a2bb308438058bc498b39e366a0f0616, type: 3}
+  m_PrefabInstance: {fileID: 7728495867929377900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7458044384950092093 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a2bb308438058bc498b39e366a0f0616, type: 3}

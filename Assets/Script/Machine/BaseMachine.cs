@@ -11,7 +11,7 @@ public abstract class BaseMachine : MonoBehaviour
 
     public event Action<Order> OnCraftingComplete;
 
-    public abstract void StartCrafting(Order order);
+    public abstract void StartCrafting(Order order, Transform parent = null);
 
     protected void CraftingDone(Order order)
     {

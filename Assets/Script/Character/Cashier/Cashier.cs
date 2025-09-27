@@ -7,6 +7,7 @@ public class Cashier : BaseCharacter
 {
     public CounterSpot targetSpot { get; private set; }
     public Order currentOrder { get; private set; }
+    public Transform coffeeSpawnPoint;
 
     protected override void Awake()
     {
@@ -21,7 +22,7 @@ public class Cashier : BaseCharacter
     public void GoToServeCustomer(CounterSpot spot, Order order)
     {
         targetSpot = spot;
-        currentOrder = order; // Store the order
+        currentOrder = order;
         stateMachine.TransitionTo(new CashierMovingToServePointState(stateMachine));
     }
    

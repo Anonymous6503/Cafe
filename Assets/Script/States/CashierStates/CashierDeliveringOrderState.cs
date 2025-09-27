@@ -25,6 +25,11 @@ public class CashierDeliveringOrderState : State
             CafeManager.Instance.playerWallet.AddMoney(order.menuItem.price);
             order.customer.CompleteOrder();
 
+            if (cashier.coffeeSpawnPoint.transform.childCount > 0)
+            {
+                GameObject.Destroy(cashier.coffeeSpawnPoint.GetChild(0).gameObject);
+            }
+
             cashier.targetSpot.FreeSpot();
             stateMachine.TransitionTo(new CashierIdleState(stateMachine));
         }
