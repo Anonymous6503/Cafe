@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the **Cafe Tycoon Mini-Game**!  
+Welcome to the **Cafe Simulator Mini-Game**!  
 This project is a 2.5D simulation game built in Unity where you manage and grow a bustling cafe. The core gameplay loop involves customers arriving, ordering from a dynamic menu, and being served by AI-controlled cashiers who use machines to prepare orders. Your goal is to earn money by efficiently serving customers, allowing you to hire more staff and buy new, more advanced machines to expand your business.
 
 This project is designed for scalability and maintainability, making heavy use of professional design patterns to ensure it can be easily expanded in the future.
@@ -114,6 +114,6 @@ If you'd like to contribute, please fork the repo and submit a PR.
 
 ## License
 
-This project is currently unlicensed. Please contact the repository owner for usage or distribution questions.
+This project is currently unlicensed. Feel free to use.
 
 ---
