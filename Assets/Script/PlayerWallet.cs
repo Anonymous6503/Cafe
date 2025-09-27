@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
 
 public class PlayerWallet : MonoBehaviour
 {
     public int startingMoney = 250;
     public int currentMoney = 0;
-    // A property to access the current money from other scripts safely
-    public int CurrentMoney 
-    { 
+
+    public static event Action OnPlayerWalletUpdate;
+    public int CurrentMoney
+    {
         get => currentMoney;
         set => currentMoney = value;
     }
@@ -19,16 +21,17 @@ public class PlayerWallet : MonoBehaviour
 
     public void AddMoney(int amount)
     {
-        if (amount <= 0) return; // Can't add zero or negative money
+        if (amount <= 0) return;
         CurrentMoney += amount;
         Debug.Log($"Received {amount}. New balance: {CurrentMoney}");
+
+        OnPlayerWalletUpdate?.Invoke();
     }
 
     public bool TrySpendMoney(int amount)
     {
         if (amount > 0 && CurrentMoney >= amount)
         {
-            CurrentMoney -= amount;
             Debug.Log($"Spent {amount}. New balance: {CurrentMoney}");
             return true;
         }
@@ -37,5 +40,11 @@ public class PlayerWallet : MonoBehaviour
             Debug.Log($"Transaction failed! Insufficient funds to spend {amount}.");
             return false;
         }
+    }
+
+    public void SpendMoney(int amount)
+    {
+        currentMoney -= amount;
+        OnPlayerWalletUpdate?.Invoke();
     }
 }

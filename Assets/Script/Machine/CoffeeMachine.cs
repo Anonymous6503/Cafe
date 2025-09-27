@@ -5,6 +5,11 @@ public class CoffeeMachine : BaseMachine
 {
     public Transform productSpawnPoint;
 
+    private void Start()
+    {
+        UpdateProgressBar(0);
+    }
+
     public override void StartCrafting(Order order, Transform parent = null)
     {
         // Check if the machine is free and the order is for this machine type.
@@ -21,14 +26,21 @@ public class CoffeeMachine : BaseMachine
 
         isBusy = true;
 
-        yield return new WaitForSeconds(order.menuItem.creationTime);
-
+        float timer = 0f;
+        while (timer < order.menuItem.creationTime)
+        {
+            timer += Time.deltaTime;
+            // Update the UI progress bar during crafting
+            UpdateProgressBar(timer / order.menuItem.creationTime);
+            yield return null;
+        }
+        UpdateProgressBar(1);
         /*if (order.menuItem.productPrefab != null && productSpawnPoint != null)
         {
             Instantiate(order.menuItem.productPrefab, productSpawnPoint.position, Quaternion.identity);
         }*/
 
-        if(parent != null)
+        if (parent != null)
         {
             Instantiate(order.menuItem.productPrefab,parent);
         }

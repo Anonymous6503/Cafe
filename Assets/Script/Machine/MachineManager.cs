@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,12 +18,29 @@ public class MachineManager : MonoBehaviour
     private List<BaseMachine> allMachines = new List<BaseMachine>();
     private bool[] isPointOccupied;
 
+    public int machinecost = 0;
+
     void Awake()
     {
         isPointOccupied = new bool[machinePlacementPoints.Count];
     }
 
-    public void SpawnNewMachine(MachineType typeToSpawn)
+    private void OnEnable()
+    {
+        PlayerWallet.OnPlayerWalletUpdate += UpdateButtonInteractivity;
+    }
+
+    private void OnDisable()
+    {
+        PlayerWallet.OnPlayerWalletUpdate -= UpdateButtonInteractivity;
+    }
+
+    private void UpdateButtonInteractivity()
+    {
+        CafeManager.Instance.uiManager.ManageAddMachineButton(CafeManager.Instance.playerWallet.CurrentMoney >= machinecost);
+    }
+
+    public void SpawnNewMachine(MachineType typeToSpawn)    
     {
         GameObject prefabToSpawn = GetPrefabForType(typeToSpawn);
         if (prefabToSpawn == null)
@@ -31,8 +49,11 @@ public class MachineManager : MonoBehaviour
             return;
         }
         int machineCost = prefabToSpawn.GetComponent<BaseMachine>().cost;
+        machinecost = machineCost;
         if (!CafeManager.Instance.playerWallet.TrySpendMoney(machineCost))
             return;
+
+        CafeManager.Instance.playerWallet.SpendMoney(machineCost);
 
         for (int i = 0; i < machinePlacementPoints.Count; i++)
         {
@@ -59,7 +80,7 @@ public class MachineManager : MonoBehaviour
         {
             if (machine.machineType == type)
             {
-                return true; 
+                return true;
             }
         }
         return false;

@@ -16,8 +16,17 @@ public class CashierManager : MonoBehaviour
             HireNewCashier();
         }
     }
+    private void OnEnable()
+    {
+        PlayerWallet.OnPlayerWalletUpdate += UpdateButtonInteractivity;
+    }
 
-    private void HireNewCashier()
+    private void OnDisable()
+    {
+        PlayerWallet.OnPlayerWalletUpdate -= UpdateButtonInteractivity;
+    }
+
+    public void HireNewCashier()
     {
         if (cashierPrefab == null || hireSpawnPoint == null)
         {
@@ -27,6 +36,7 @@ public class CashierManager : MonoBehaviour
         if (!CafeManager.Instance.playerWallet.TrySpendMoney(cashierHireCost))
             return;
 
+        CafeManager.Instance.playerWallet.SpendMoney(cashierHireCost);
         GameObject cashierInstance = Instantiate(cashierPrefab, hireSpawnPoint.position, Quaternion.identity);
         cashierInstance.name = $"Cashier {allCashiers.Count + 1}";
 
@@ -39,6 +49,10 @@ public class CashierManager : MonoBehaviour
         }
     }
 
+    private void UpdateButtonInteractivity()
+    {
+        CafeManager.Instance.uiManager.ManageAddCashierButton(CafeManager.Instance.playerWallet.CurrentMoney >= cashierHireCost);
+    }
     public Cashier GetNearestIdleCashier(Vector3 targetPosition)
     {
         Cashier nearestCashier = null;

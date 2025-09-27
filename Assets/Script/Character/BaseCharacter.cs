@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(StateMachine))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -8,6 +9,9 @@ public class BaseCharacter : MonoBehaviour, ICharacter
     public StateMachine stateMachine { get; private set; }
     public NavMeshAgent navMeshAgent { get; private set; }
     public Animator animator { get; private set; }
+
+    public GameObject progressBarContainer;
+    public Image progressBarFillImage;
 
     protected virtual void Awake()
     {
@@ -50,7 +54,7 @@ public class BaseCharacter : MonoBehaviour, ICharacter
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
         float elapsedTime = 0f;
-        float rotationTime = 0.5f; // Time in seconds to complete the rotation
+        float rotationTime = 0.5f;
 
         while (elapsedTime < rotationTime)
         {
@@ -58,7 +62,19 @@ public class BaseCharacter : MonoBehaviour, ICharacter
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        // Ensure the final rotation is exact
         transform.rotation = targetRotation;
+    }
+
+    public void UpdateProgressBar(float progress) 
+    {
+        if (progressBarFillImage != null)
+        {
+            progressBarFillImage.fillAmount = progress;
+        }
+
+        if (progressBarContainer != null)
+        {
+            progressBarContainer.SetActive(progress > 0 && progress < 1);
+        }
     }
 }

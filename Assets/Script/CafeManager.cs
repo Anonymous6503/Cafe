@@ -10,8 +10,9 @@ public class CafeManager : MonoBehaviour
     public CustomerManager customerManager;
     public CashierManager cashierManager;
     public MenuItemData startingItem; 
-    private Menu menu;
+    public Menu menu;
     public PlayerWallet playerWallet;
+    public UIManager uiManager;
 
     private Queue<Order> waitingOrderQueue = new Queue<Order>();
 

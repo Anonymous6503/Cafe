@@ -212,7 +212,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6490856774813306307}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -285,8 +285,12 @@ MonoBehaviour:
   counterSpots:
   - customerPoint: {fileID: 8324827315034141041}
     servePoint: {fileID: 450653072875427009}
+    isOccupied: 0
+    customerInSpot: {fileID: 0}
   - customerPoint: {fileID: 2523510697966075188}
     servePoint: {fileID: 6993784621639692659}
+    isOccupied: 0
+    customerInSpot: {fileID: 0}
 --- !u!1 &7292962964911326364
 GameObject:
   m_ObjectHideFlags: 0
